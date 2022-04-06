@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void StrToHex(char *string, unsigned int *hexArray);
+int StrToHex(char *string, unsigned int *hexArray);
 
 int main(void)
 {
@@ -10,9 +10,9 @@ int main(void)
     
     scanf("%s", str);
 
-    StrToHex(str, hex);
+    int len = StrToHex(str, hex);
 
-    for (int i = 0; i < (strlen(str) >> 1); i++)
+    for (int i = 0; i < len; i++)
     {
         printf("%02x  ", hex[i]);
     }
@@ -20,7 +20,7 @@ int main(void)
     return 0;
 }
 
-void StrToHex(char *string, unsigned int *hexArray)
+int StrToHex(char *string, unsigned int *hexArray)
 {
     int len = strlen(string);
     if ((len & 1) != 0)
@@ -33,4 +33,6 @@ void StrToHex(char *string, unsigned int *hexArray)
     {
         sscanf(&string[j], "%02x", &hexArray[i]);
     }
+
+    return len >> 1;
 }
